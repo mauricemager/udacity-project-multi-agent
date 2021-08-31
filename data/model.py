@@ -7,24 +7,22 @@ import numpy as np
 def hidden_init(layer):
     fan_in = layer.weight.data.size()[0]
     lim = 1. / np.sqrt(fan_in)
+    
     return (-lim, lim)
 
 
 class Network(nn.Module):
 
     def __init__(self, input_dim, hidden_in_dim, hidden_out_dim, output_dim, seed, actor=False):
-
-        # super(Network, self).__init__()
         super().__init__()
 
         self.seed = torch.manual_seed(seed)
-
-        self.fc1 = nn.Linear(input_dim, hidden_in_dim)
-        self.fc2 = nn.Linear(hidden_in_dim, hidden_out_dim)
-        self.fc3 = nn.Linear(hidden_out_dim, output_dim)
+        self.fc1  = nn.Linear(input_dim, hidden_in_dim)
+        self.fc2  = nn.Linear(hidden_in_dim, hidden_out_dim)
+        self.fc3  = nn.Linear(hidden_out_dim, output_dim)
 
         self.activation = F.relu
-        self.actor = actor
+        self.actor      = actor
         self.reset_parameters()
 
     def reset_parameters(self):
@@ -36,12 +34,12 @@ class Network(nn.Module):
         if self.actor:
             h1 = self.activation(self.fc1(x))
             h2 = self.activation(self.fc2(h1))
-
             h3 = self.fc3(h2)
-
+            
             return torch.tanh(h3)
         else:
             h1 = self.activation(self.fc1(x))
             h2 = self.activation(self.fc2(h1))
             h3 = self.fc3(h2)
+            
             return h3
