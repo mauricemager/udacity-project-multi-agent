@@ -1,6 +1,6 @@
 [//]: # (Image References)
 
-[image1]: https://video.udacity-data.com/topher/2018/May/5af7955a_tennis/tennis.png "Tennis environment"
+![Trained banana agent](data/trained-maddpg.gif)
 
 # Train a Unity Environment (Multi-Agent Tennis) using MADDPG
 
